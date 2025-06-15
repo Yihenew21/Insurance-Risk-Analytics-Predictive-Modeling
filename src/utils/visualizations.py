@@ -164,3 +164,4 @@ def plot_creative_visualizations(df: pd.DataFrame, save_dir: str):
     plt.ylabel('Month', fontsize=12)
     plt.savefig(os.path.join(save_dir, 'claim_frequency_heatmap.png'))
     plt.show()
+    

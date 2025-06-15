@@ -1,7 +1,6 @@
 """Unit tests for data_loader module."""
 
 import pytest
-import pandas as pd
 from src.utils.data_loader import load_insurance_data
 
 def test_load_insurance_data_missing_file():
@@ -15,3 +14,4 @@ def test_load_insurance_data_empty_file(tmp_path):
     empty_file.write("")
     with pytest.raises(ValueError):
         load_insurance_data(str(empty_file))
+        

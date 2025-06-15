@@ -1,3 +1,5 @@
+"""Module for exploratory data analysis of insurance data."""
+
 import pandas as pd
 import numpy as np
 
@@ -5,8 +7,18 @@ class InsuranceEDA:
     """Class to perform EDA on insurance datasets."""
     def __init__(self, df):
         self.df = df
-        self.numerical_cols = ['PolicyID', 'PostalCode', 'RegistrationYear', 'Cylinders', 'cubiccapacity', 'kilowatts', 'NumberOfDoors', 'CustomValueEstimate', 'NumberOfVehiclesInFleet', 'SumInsured', 'CalculatedPremiumPerTerm', 'TotalPremium', 'TotalClaims']
-        self.categorical_cols = ['IsVATRegistered', 'Citizenship', 'LegalType', 'Title', 'Language', 'Bank', 'AccountType', 'MaritalStatus', 'Gender', 'Country', 'Province', 'MainCrestaZone', 'SubCrestaZone', 'ItemType', 'VehicleType', 'make', 'Model', 'bodytype', 'AlarmImmobiliser', 'TrackingDevice', 'NewVehicle', 'WrittenOff', 'Rebuilt', 'Converted', 'CrossBorder', 'TermFrequency', 'ExcessSelected', 'CoverCategory', 'CoverType', 'CoverGroup', 'Section', 'Product', 'StatutoryClass', 'StatutoryRiskType']
+        self.numerical_cols = ['PolicyID', 'PostalCode', 'RegistrationYear', 'Cylinders', 
+                              'cubiccapacity', 'kilowatts', 'NumberOfDoors', 
+                              'CustomValueEstimate', 'NumberOfVehiclesInFleet', 'SumInsured', 
+                              'CalculatedPremiumPerTerm', 'TotalPremium', 'TotalClaims']
+        self.categorical_cols = ['IsVATRegistered', 'Citizenship', 'LegalType', 'Title', 'Language', 
+                                'Bank', 'AccountType', 'MaritalStatus', 'Gender', 'Country', 
+                                'Province', 'MainCrestaZone', 'SubCrestaZone', 'ItemType', 
+                                'VehicleType', 'make', 'Model', 'bodytype', 'AlarmImmobiliser', 
+                                'TrackingDevice', 'NewVehicle', 'WrittenOff', 'Rebuilt', 
+                                'Converted', 'CrossBorder', 'TermFrequency', 'ExcessSelected', 
+                                'CoverCategory', 'CoverType', 'CoverGroup', 'Section', 'Product', 
+                                'StatutoryClass', 'StatutoryRiskType']
 
     def get_descriptive_stats(self) -> pd.DataFrame:
         """
@@ -45,8 +57,7 @@ class InsuranceEDA:
         if method.lower() == 'zscore':
             z_scores = np.abs((self.df[column] - self.df[column].mean()) / self.df[column].std())
             return z_scores > threshold
-        else:
-            raise ValueError("Method must be 'iqr' or 'zscore'")
+        raise ValueError("Method must be 'iqr' or 'zscore'")
 
     def calculate_loss_ratio(self, total_claims, total_premium):
         """
@@ -58,3 +69,4 @@ class InsuranceEDA:
             pd.Series: Loss Ratio values.
         """
         return total_claims / total_premium.where(total_premium != 0, np.nan)
+    

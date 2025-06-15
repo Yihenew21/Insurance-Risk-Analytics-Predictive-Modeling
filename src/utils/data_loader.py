@@ -30,7 +30,8 @@ def load_insurance_data(data_path: Optional[str] = None) -> pd.DataFrame:
     if df.empty:
         raise ValueError("Loaded dataset is empty")
     
-    numerical_cols = ['TotalPremium', 'TotalClaims', 'SumInsured', 'CustomValueEstimate', 'CalculatedPremiumPerTerm']
+    numerical_cols = ['TotalPremium', 'TotalClaims', 'SumInsured', 'CustomValueEstimate', 
+                      'CalculatedPremiumPerTerm']
     for col in numerical_cols:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
