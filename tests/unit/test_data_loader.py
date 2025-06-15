@@ -11,7 +11,6 @@ def test_load_insurance_data_missing_file():
 def test_load_insurance_data_empty_file(tmp_path):
     """Test loading an empty file raises ValueError."""
     empty_file = tmp_path / "empty.csv"
-    empty_file.write("")
+    empty_file.write_text("")
     with pytest.raises(ValueError):
         load_insurance_data(str(empty_file))
-        

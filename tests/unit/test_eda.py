@@ -15,17 +15,16 @@ def sample_df():
         'TransactionMonth': pd.to_datetime(['2024-01-01', '2024-02-01', '2024-03-01', '2024-04-01'])
     })
 
-def test_get_descriptive_stats(new_sample_df):
+def test_get_descriptive_stats(sample_df):
     """Test descriptive statistics calculation."""
-    eda = InsuranceEDA(new_sample_df)
+    eda = InsuranceEDA(sample_df)
     stats = eda.get_descriptive_stats()
     assert 'TotalPremium' in stats.columns
     assert stats.loc['count', 'TotalPremium'] == 3
 
-def test_calculate_loss_ratio(new_sample_df):
+def test_calculate_loss_ratio(sample_df):
     """Test Loss Ratio calculation."""
-    eda = InsuranceEDA(new_sample_df)
-    loss_ratio = eda.calculate_loss_ratio(new_sample_df['TotalClaims'], new_sample_df['TotalPremium'])
-    assert len(loss_ratio) == len(new_sample_df)
+    eda = InsuranceEDA(sample_df)
+    loss_ratio = eda.calculate_loss_ratio(sample_df['TotalClaims'], sample_df['TotalPremium'])
+    assert len(loss_ratio) == len(sample_df)
     assert loss_ratio.iloc[0] == 0.5  # 50/100
-    
