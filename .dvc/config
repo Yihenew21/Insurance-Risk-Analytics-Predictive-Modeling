@@ -1,0 +1,6 @@
+[core]
+    remote = localstorage
+['remote "localstorage"']
+    url = C:\Users\hp\Desktop\dvc_storage
+['remote "gdrive_remote"']
+    url = gdrive://1rbKV8fwHtqtboevBxHiN4v62W5BGLHip
