@@ -25,6 +25,7 @@ def test_get_descriptive_stats(sample_df):
 def test_calculate_loss_ratio(sample_df):
     """Test Loss Ratio calculation."""
     eda = InsuranceEDA(sample_df)
-    df = eda.calculate_loss_ratio()
-    assert 'LossRatio' in df.columns
-    assert df['LossRatio'].iloc[0] == 0.5  # 50/100
+    loss_ratio = eda.calculate_loss_ratio(sample_df['TotalClaims'], sample_df['TotalPremium'])
+    assert len(loss_ratio) == len(sample_df)
+    assert loss_ratio.iloc[0] == 0.5  # 50/100
+    

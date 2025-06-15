@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 class InsuranceEDA:
+    """Class to perform EDA on insurance datasets."""
     def __init__(self, df):
         self.df = df
         self.numerical_cols = ['PolicyID', 'PostalCode', 'RegistrationYear', 'Cylinders', 'cubiccapacity', 'kilowatts', 'NumberOfDoors', 'CustomValueEstimate', 'NumberOfVehiclesInFleet', 'SumInsured', 'CalculatedPremiumPerTerm', 'TotalPremium', 'TotalClaims']
@@ -35,14 +36,25 @@ class InsuranceEDA:
             pd.Series: Boolean series indicating outliers.
         """
         if method.lower() == 'iqr':
-            Q1 = self.df[column].quantile(0.25)
-            Q3 = self.df[column].quantile(0.75)
-            IQR = Q3 - Q1
-            lower_bound = Q1 - threshold * IQR
-            upper_bound = Q3 + threshold * IQR
+            q1 = self.df[column].quantile(0.25)
+            q3 = self.df[column].quantile(0.75)
+            iqr = q3 - q1
+            lower_bound = q1 - threshold * iqr
+            upper_bound = q3 + threshold * iqr
             return (self.df[column] < lower_bound) | (self.df[column] > upper_bound)
-        elif method.lower() == 'zscore':
+        if method.lower() == 'zscore':
             z_scores = np.abs((self.df[column] - self.df[column].mean()) / self.df[column].std())
             return z_scores > threshold
         else:
             raise ValueError("Method must be 'iqr' or 'zscore'")
+
+    def calculate_loss_ratio(self, total_claims, total_premium):
+        """
+        Calculate Loss Ratio (TotalClaims / TotalPremium).
+        Args:
+            total_claims (pd.Series): Series of total claims.
+            total_premium (pd.Series): Series of total premiums.
+        Returns:
+            pd.Series: Loss Ratio values.
+        """
+        return total_claims / total_premium.where(total_premium != 0, np.nan)

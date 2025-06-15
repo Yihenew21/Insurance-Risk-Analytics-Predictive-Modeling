@@ -1,10 +1,10 @@
 """Visualization utilities for insurance data EDA."""
 
+from typing import List, Optional
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from typing import List, Optional
-import os
 
 def setup_plot_style():
     """Configure Seaborn and Matplotlib plot styles."""

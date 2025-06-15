@@ -1,9 +1,9 @@
 """Utilities for loading and preprocessing data."""
 
-import pandas as pd
 import os
-from dotenv import load_dotenv
 from typing import Optional
+import pandas as pd
+from dotenv import load_dotenv
 
 def load_insurance_data(data_path: Optional[str] = None) -> pd.DataFrame:
     """
