@@ -4,10 +4,15 @@ numpy>=1.26.4
 scipy>=1.14.1
 statsmodels>=0.14.2  # Added for advanced statistical tests (ANOVA, Tukey HSD)
 
+# Machine Learning Libraries
+scikit-learn>=1.5.0  # For regression and classification models
+xgboost>=2.1.0       # For XGBoost models
+shap>=0.45.0         # For SHAP analysis and feature importance
+
 # Visualization
 matplotlib>=3.9.2
 seaborn>=0.13.2
-plotly>=5.22.0  # Optional, retained for future tasks
+plotly>=5.22.0       # Optional, retained for future tasks
 
 # Environment Variables
 python-dotenv>=1.0.1
@@ -20,6 +25,3 @@ pytest-cov>=5.0.0
 
 # Version Control / Data Versioning
 dvc[gdrive]>=3.20.0  # Include gdrive support
-
-# Cleanup (remove redundant package)
-# dotenv  ← REMOVED (python-dotenv is sufficient)
